@@ -16,31 +16,31 @@ var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.l
 
 //Allows the user 9 guesses
 // guesses = guesses || 9
-var updateGuessesLeft = function () {
+GuessesLeft = function () {
   // Here we are grabbing the HTML element and setting it equal to the guessesLeft. (i.e. guessesLeft will get displayed in HTML)
-  document.querySelector('#guessLeft').innerHTML = "Guesses left: " + guessesLeft;
+  document.querySelector('#guessLeft').innerHTML = "Guesses Left: " + guessesLeft;
 };
 
-var updateLetterToGuess = function () {
-  this.letterToGuess = this.computerChoices[Math.floor(Math.random() * this.computerChoices.length)];
+LetterToGuess = function () {
+  letterToGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 };
-var updateGuessesSoFar = function () {
+GuessesSoFar = function () {
   // Here we take the guesses the user has tried -- then display it as letters separated by commas. 
   document.querySelector('#let').innerHTML = "Your Guesses so far: " + guessedLetters.join(', ');
 };
 // Function will be called when we reset everything
-var reset = function () {
+reset = function () {
   totalGuesses = 9;
   guessesLeft = 9;
   guessedLetters = [];
 
-  updateLetterToGuess();
-  updateGuessesLeft();
-  updateGuessesSoFar();
+  LetterToGuess();
+  GuessesLeft();
+  GuessesSoFar();
 }
 
-updateLetterToGuess();
-updateGuessesLeft();
+LetterToGuess();
+GuessesLeft();
 
 
 //When key is released it becomes the users guess
@@ -49,21 +49,21 @@ document.onkeyup = function (event) {
   var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
   guessedLetters.push(userGuess);
-  updateGuessesLeft();
-  updateGuessesSoFar();
+  GuessesLeft();
+  GuessesSoFar();
 
   if (guessesLeft > 0) {
     if (userGuess == letterToGuess) {
       wins++;
       document.querySelector('#wins').innerHTML = "Wins: " + wins;
-      alert("Yes, you are psychic!");
+      alert("Yes, you are not a puny Fairy!");
       reset();
     }
   } else if (guessesLeft == 0) {
     // Then we will loss and we'll update the html to display the loss 
     losses++;
     document.querySelector('#losses').innerHTML = "Losses: " + losses;
-    alert("Sorry, you're not psychic, maybe try again?");
+    alert("HAHAHA you are Puny Fairy and you Lose!");
     // Then we'll call the reset. 
     reset();
   }
